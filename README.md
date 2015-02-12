@@ -1,4 +1,4 @@
-# PSI-TOUR_MANAUS
+# PSI-EncontreEmManaus
 Componentes:
 
 Tiago Moura | Ketlen Parente
