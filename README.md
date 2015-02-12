@@ -1,4 +1,4 @@
 # PSI-TOUR_MANAUS
 Componentes:
 
-Tiago Moura | 
+Tiago Moura | Ketlen Parente
