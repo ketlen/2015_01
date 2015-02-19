@@ -2,4 +2,4 @@
 
 Componentes:
 
-Tiago Moura | Ketlen Parente | Adrinao Villalba | Luiz Mario | Robson Olinger
+Tiago Moura | Ketlen Parente | Adriano Villalba | Luiz Mario | Robson Olinger
