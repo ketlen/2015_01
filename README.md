@@ -27,7 +27,7 @@ Componentes:
 5. [WEB] EXCLUIR COMENTÁRIOS
 6. [WEB] GERAR GRÁFICO
 7. 
-* Robson Olinger
+* Robson Olinger (RobsonOlinger)
 * [WEB] EFETUAR LOGIN
 * [WEB] MANTER LOCAL
 * [WEB] GERAR RELATORIO DE LOCAIS
