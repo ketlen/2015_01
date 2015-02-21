@@ -5,7 +5,7 @@ Componentes:
 * Tiago Moura 
 
 
-* :: KETLEN PARENTE ::
+* :: KETLEN PARENTE (user: ketlen) ::
 * (WEB)  1 - GerarRelatorioAvaliações;  2 - GerarRelatorioVisitasPorLocal;  3 - GerarRelatorioComentarios
 * (MOBILE)  1 - LogarComFacebook; 2 - CurtirNoFacebook; 3 - CompartilharNoFacebook
 
