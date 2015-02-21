@@ -5,7 +5,7 @@ Componentes:
 * Tiago Moura 
 
 
-:: KETLEN PARENTE ::
+* :: KETLEN PARENTE ::
 * (WEB) 
 * 1 - GerarRelatorioAvaliações 
 * 2 - GerarRelatorioVisitasPorLocal
@@ -14,7 +14,7 @@ Componentes:
 * 1 - LogarComFacebook
 * 2 - CurtirNoFacebook 
 * 3 - CompartilharNoFacebook
-:: ADRIANO VILLALBA :: 
+* :: ADRIANO VILLALBA :: 
 * (web) 
 * 1- manter usuario 
 * 2 - manter agenda 
