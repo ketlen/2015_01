@@ -26,5 +26,5 @@ Componentes:
 4. [WEB] MANTER CATEGORIA
 5. [WEB] EXCLUIR COMENTÁRIOS
 6. [WEB] GERAR GRÁFICO
-
+7. 
 * Robson Olinger
