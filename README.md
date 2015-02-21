@@ -19,5 +19,12 @@ Componentes:
 * 2 - exibir local no mapa 
 * 3 - exibir trajeto no mapa
 
-* Luiz Mario 
+* ::Luiz Mario (LmarioLmario)
+1. [MOB] BUSCAR LOCAL
+2. [MOB] LISTAR LOCAIS
+3. [MOB] EXIBIR LOCAIS
+4. [WEB] MANTER CATEGORIA
+5. [WEB] EXCLUIR COMENTÁRIOS
+6. [WEB] GERAR GRÁFICO
+
 * Robson Olinger
