@@ -14,6 +14,8 @@ Componentes:
 * 1 - LogarComFacebook
 * 2 - CurtirNoFacebook 
 * 3 - CompartilharNoFacebook
+
+
 * :: ADRIANO VILLALBA :: 
 * (web) 
 * 1- manter usuario 
