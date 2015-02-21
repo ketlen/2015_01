@@ -9,7 +9,7 @@ Componentes:
 * (WEB)  1 - GerarRelatorioAvaliações;  2 - GerarRelatorioVisitasPorLocal;  3 - GerarRelatorioComentarios
 * (MOBILE)  1 - LogarComFacebook; 2 - CurtirNoFacebook; 3 - CompartilharNoFacebook
 
-* :: ADRIANO VILLALBA :: 
+* :: ADRIANO VILLALBA (adrianovillalba20) 
 * (web) 
 * 1- manter usuario 
 * 2 - manter agenda 
