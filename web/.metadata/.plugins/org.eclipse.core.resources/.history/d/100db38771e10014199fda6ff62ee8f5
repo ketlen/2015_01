@@ -1,0 +1,81 @@
+package br.com.encontreEmManaus.controller;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+
+@ManagedBean
+@ViewScoped
+public class UsuarioMB {
+
+	private static final long serialVersionUID = 1L;
+	private List<Cliente> clientes;
+	private Cliente cliente;
+
+	public ClienteMB() {
+		clientes = new ArrayList<Cliente>();
+		cliente = new Cliente();
+		listar();
+	}
+	
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setCliente(Cliente clienteSelecionado) {
+		this.cliente = clienteSelecionado;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void salvar() {
+		try {
+			ClienteDao dao = new ClienteDao();
+			if(cliente.getId() == null) {
+				dao.salvar(cliente);
+				System.out.println("Cliente salvo");
+			} else {
+				dao.editar(cliente);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void deletar(Cliente cl) {
+		// cl = cliente;
+		try{
+		ClienteDao dao = new ClienteDao();
+		dao.excluir(cl);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	public void listar() {
+		try{
+		ClienteDao dao = new ClienteDao();
+		clientes = dao.listar();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+
+	public void alterar(Cliente cl) {
+		//cl = cliente;
+//		ClienteDao dao = new ClienteDao();
+//		dao.editar(cl);
+//		this.cliente = cl;
+//		listar();
+	}
+
+}

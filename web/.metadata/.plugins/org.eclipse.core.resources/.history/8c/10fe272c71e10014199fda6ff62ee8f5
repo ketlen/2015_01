@@ -1,0 +1,5 @@
+package br.com.encontreEmManaus.dao;
+
+public class UsuarioDao extends AbstractDao<Usuario> {
+
+}

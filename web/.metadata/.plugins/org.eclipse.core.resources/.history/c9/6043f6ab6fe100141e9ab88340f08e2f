@@ -1,0 +1,81 @@
+package br.com.encontreEmManaus.dao;
+
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import br.com.jt.entity.AbstractEntity;
+import br.com.jt.util.JPAUtil;
+
+public abstract class AbstractDao<T extends AbstractEntity> implements
+		Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private EntityManager entityManager = new JPAUtil().getEntityManager();
+
+	private Class<T> persistentClass;
+
+	@PostConstruct
+	public void init() {
+		ParameterizedType type = (ParameterizedType) getClass()
+				.getGenericSuperclass();
+		persistentClass = (Class<T>) type.getActualTypeArguments()[0];
+	}
+
+	public void salvar(T entity) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(entity);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void editar(T entity) {
+		entityManager.getTransaction().begin();
+		entityManager.merge(entity);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void excluir(T entity) {
+		entityManager.getTransaction().begin();
+		entityManager.remove(entityManager.getReference(entity.getClass(),entity.getId()));
+		//entityManager.remove(entityManager.getReference(persistentClass, entity.getId()));
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void consultar(T entity) {
+		entityManager.getTransaction().begin();
+		entityManager.find(entity.getClass(), entity.getId());
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+	}
+
+	private Class<?> getTypeClass() {
+
+		Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		return clazz;
+	}
+
+	public List<T> listar() {
+		Query query = entityManager.createQuery("Select T FROM "+ getTypeClass().getName() + " T");
+		List<T> lista = query.getResultList();
+		return lista;
+	}
+
+	public T getByPrimaryKey(T entity) {
+		return entityManager.find(persistentClass, entity.getId());
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+
+	};
+
+}
