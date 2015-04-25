@@ -1,0 +1,21 @@
+package br.com.encontreEmManaus.teste;
+
+import br.com.encontreEmManaus.dao.AgendaDao;
+import br.com.encontreEmManaus.dao.UsuarioDao;
+import br.com.encontreEmManaus.entity.Agenda;
+import br.com.encontreEmManaus.entity.Usuario;
+
+public class TesteAgenda {
+
+public static void main(String[] args) {
+		
+		Agenda agenda = new Agenda();
+		agenda.setLocal("Manauara");
+		agenda.setEvento("shopping");
+		agenda.setData(10/06/15);
+				
+		AgendaDao dao = new  AgendaDao();
+		dao.salvar(agenda);
+
+	}
+}

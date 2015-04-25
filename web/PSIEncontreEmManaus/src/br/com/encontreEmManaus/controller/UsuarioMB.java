@@ -14,7 +14,6 @@ import br.com.encontreEmManaus.entity.Usuario;
 @ViewScoped
 public class UsuarioMB {
 
-	private static final long serialVersionUID = 1L;
 	private List<Usuario> usuarios;
 	private Usuario usuario;
 

@@ -1,0 +1,17 @@
+package br.com.encontreEmManaus.controller;
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import br.com.encontreEmManaus.entity.Usuario;
+
+@ManagedBean
+@ViewScoped
+public class AgendaMB {
+
+	private static final long serialVersionUID = 1L;
+	private List<Agenda> agendas;
+	private Agenda agenda;
+}
