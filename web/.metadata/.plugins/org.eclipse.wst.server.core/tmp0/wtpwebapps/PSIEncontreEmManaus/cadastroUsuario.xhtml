@@ -5,16 +5,27 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
+<f:view contentType="text/html"/>
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Cadastro de Usuario</title>
 	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
 </h:head>
 <h:body >
-		 			
+
+<div id="blocoCabecalho">
+		<div class="container">
+		</div>
+	</div>
+	
+	<div id="blocoConteudo">
+	<div class="container">
+		 		
+		 	<h2>Cadastro de Usuarios</h2>		
 			<h:form prependId="false" id="prform">
 				
+				<fieldset>
+				<legend>Dados da Agenda</legend>
 				<p:panelGrid columns="2"
 					columnClasses="colunaEsquerda,colunaDireita" rowClasses="normal"
 					headerClass="tituloFormulario" styleClass="tabelaGC">
@@ -34,11 +45,12 @@
 					<h:outputLabel for="senha" value="Senha" />
 					<p:password id="senha" value="#{usuarioMB.usuario.senha}" />
 				</p:panelGrid>
-				<p:commandButton value="Salvar" action="#{usuarioMB.salvar}"
-					update=":tbusuario" />
+				<p:commandButton value="Salvar" action="#{usuarioMB.salvar}" ajax="false" />
+				</fieldset>
 			</h:form>
 
 			<h:form id="tbusuario">
+			<h2>Listagem da Usuarios</h2>
 				<p:dataTable id="tabela" var="usuario" value="#{usuarioMB.usuarios}">
 					<p:column headerText="Nome: ">
 						<h:outputText value="#{usuario.nome}" />
@@ -54,20 +66,26 @@
 					</p:column>
 					<p:column>
 						<p:commandButton value="Deletar"
-							action="#{usuarioMB.deletar(usuario)}" update="tabela">
+							action="#{usuarioMB.deletar}" ajax="false">
 							<f:setPropertyActionListener value="#{usuario}"
-								target="#{usuarioMB.usuario}" for="" />
+								target="#{usuarioMB.usuario}" />
 						</p:commandButton>
 					</p:column>
 					<p:column>
 						<p:commandButton value="Alterar"
-							action="#{usuarioMB.alterar(usuario)}" update=":prform">
+							action="#{usuarioMB.salvar}" ajax="false">
 							<f:setPropertyActionListener value="#{usuario}"
 								target="#{usuarioMB.usuario}"/>
 						</p:commandButton>						
 					</p:column>
 				</p:dataTable>
 			</h:form>
-	
+	</div>
+	</div>
+	<div id="blocoRodape">
+	<div class="container">
+		
+	</div>
+	</div>
 </h:body>
 </html>

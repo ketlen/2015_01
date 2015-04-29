@@ -55,17 +55,19 @@ public class UsuarioMB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		listar();
 		
 }
 
-	public void deletar(Usuario cl) {
+	public void deletar() {
 		// cl = cliente;
 		try{
 		UsuarioDao dao = new UsuarioDao();
-		dao.excluir(cl);
+		dao.excluir(usuario);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		listar();
 	}
 
 	public void listar() {
