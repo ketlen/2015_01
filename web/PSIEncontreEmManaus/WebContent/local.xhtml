@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Cadastro de Local</title>
+	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
+</h:head>
+<h:body >
+		 			
+			<h:form prependId="false" id="prform">
+				
+				<p:panelGrid columns="2"
+					columnClasses="colunaEsquerda,colunaDireita" rowClasses="normal"
+					headerClass="tituloFormulario" styleClass="tabelaGC">
+					<f:facet name="header">
+						<h:outputText value="Cadastro de Locais" />
+					</f:facet>
+					<h:outputLabel for="nome" value="Nome" />
+					<p:inputText id="nome" size="40" value="#{localMB.local.nome}" />
+					<h:outputLabel for="rua" value="RUA" />
+					<p:inputText id="rua" size="11" value="#{localMB.local.rua}" />
+					<h:outputLabel for="numero" value="Numero" />
+					<p:inputText id="numero" size="11"
+						value="#{localMB.local.numero}" />
+					<h:outputLabel for="bairro" value="Bairro" />
+					<p:inputText id="bairro" size="40"
+						value="#{localMB.local.bairro}" />
+					
+				</p:panelGrid>
+				<p:commandButton value="Salvar" action="#{localMB.salvar}"
+					ajax="false" />
+					
+					<p:commandLink action="#{localMB.gerar}" value=" Gerar Relatório">
+								   </p:commandLink>
+					
+			</h:form>
+
+           <h2>Cadastro de Local</h2>
+			<h:form id="tblocal">
+				<p:dataTable id="tabela" var="local" value="#{localMB.locals}">
+					<p:column headerText="Nome: ">
+						<h:outputText value="#{local.nome}" />
+					</p:column>
+					<p:column headerText="Rua: ">
+						<h:outputText value="#{local.rua}" />
+					</p:column>
+					<p:column headerText="Numero: ">
+						<h:outputText value="#{local.numero}" />
+					</p:column>
+					<p:column headerText="Bairro: ">
+						<h:outputText value="#{local.bairro}" />
+					</p:column>
+					<p:column>
+						<p:commandButton value="Deletar"
+							action="#{localMB.deletar}" update="tabela">
+							<f:setPropertyActionListener value="#{local}"
+								target="#{localMB.local}" />
+						</p:commandButton>
+					</p:column>
+					<p:column>
+						<p:commandButton value="Alterar"
+							action="#{localMB.salvar}" ajax="false">
+							<f:ajax render="@form :tblocal"/>
+							<f:setPropertyActionListener value="#{local}"
+								target="#{localMB.local}"/>
+						</p:commandButton>						
+					</p:column>
+				</p:dataTable>
+			</h:form>
+	<div id="blocoRodape">
+	<div class="container">
+		<p>Copyright 2014. 
+		Todos os direitos ao Encontre Em Manaus</p>
+	</div>
+	</div>
+</h:body>
+</html>
