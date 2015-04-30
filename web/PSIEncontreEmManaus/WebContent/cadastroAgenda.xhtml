@@ -8,7 +8,7 @@
 <f:view contentType="text/html"/>
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Cadastro de Usuario</title>
+	<title>Cadastro de Agenda</title>
 	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
 	<h:outputStylesheet library="css" name="grid.css"/>
 	<h:outputStylesheet library="css" name="style.css"/>
@@ -35,27 +35,30 @@
 					<f:facet name="header">
 						<h:outputText value="Cadastro de Agendas" />
 					</f:facet>
+					<h:outputLabel value="Id" for="id" rendered="#{agendaMB.agenda.id != null}"/>
+					<p:inputText id="id" value="#{agendaMB.agenda.id}" rendered="#{agendaMB.agenda.id != null}" readonly="true"/>
 					<h:outputLabel for="local" value="Local:" />
-					<p:inputText id="local" size="40" value="#{agendaMB.agenda.local}"/>
+					<p:inputText id="local" size="40" value="#{agendaMB.agenda.local}" />
 					<h:outputLabel for="evento" value="Evento:"/>
 					<p:inputText id="evento" size="50" value="#{agendaMB.agenda.evento}"/>
 					<h:outputLabel for="data" value="Data:">
 					</h:outputLabel>
-					<p:calendar id="data" value="#{agendaMB.agenda.data}" >
-						<f:convertDateTime pattern="dd/MM/yy"/>
-					</p:calendar>
+					<p:calendar id="data" pattern="dd/MM/yyyy" value="#{agendaMB.agenda.data}" />
 					
 		</p:panelGrid>
-			<p:commandButton value="Salvar" action="#{agendaMB.salvar}" ajax="false" update=":formAgenda">
-			</p:commandButton>
-			
+			<p:commandButton value="Salvar" action="#{agendaMB.salvar}" ajax="false" />
+				
 	</fieldset>
 	</h:form>
 	
 	
 	<h:form id="tbAgenda">
-	<h2>Listagem da Agenda</h2>
+	
 		<p:dataTable id="tabela" var="agenda" value="#{agendaMB.agendas}" >
+		
+			<f:facet name="header">
+			        Listagem da Agenda
+			    </f:facet>
 			<p:column headerText="Local:">
 				<h:outputText value="#{agenda.local}" />
 			</p:column>
@@ -64,25 +67,24 @@
 			</p:column>
 			<p:column headerText="Data:">
 				<h:outputText value="#{agenda.data}" >
-					<f:convertDateTime pattern="dd/MM/yy"/>
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
 				</h:outputText>
 			</p:column>
 			
 			<p:column>
 				<p:commandButton value="Deletar"
 					action="#{agendaMB.deletar}" ajax="false">
-					<f:ajax render="@form :tbAgenda"/>
 					<f:setPropertyActionListener value="#{agenda}"
-						target="#{agendaMB.agenda}" for="" />
+						target="#{agendaMB.agenda}" />
 				</p:commandButton>
 			</p:column>
 				<p:column>
 					<p:commandButton value="Alterar"
 						action="#{agendaMB.salvar}" ajax="false">
-						<f:ajax  render="@form :tbAgenda"/>
+						<f:ajax render="@form :tbAgenda" />
 						<f:setPropertyActionListener value="#{agenda}"
-							target="#{agendaMB.agenda}"/>
-					</p:commandButton>						
+							target="#{agendaMB.agenda}" />
+					</p:commandButton>				
 					</p:column>
 		
 		</p:dataTable>

@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view contentType="text/html"/>
+<h:head>
+	<h:outputStylesheet library="css" name="grid.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<meta charset="UTF-8" />
+	<title>Cadastro de Categoria</title>
+	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
+</h:head>
+<h:body >
+
+<div id="blocoConteudo">
+	<div class="container">
+
+		<h:form id="formcategoria">
+			<h2>
+				<h:outputText value="Nova Categoria" />
+			</h2>
+
+
+			<fieldset>
+				<legend>Dados da Categoria</legend>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText id="nome" maxlength="20" size="25"
+						placeholder="Digite a nova categoria"
+						value="#{categoriaMB.categoria.nome}" required="true"
+						requiredMessage="O Nome obrigatorio" />
+
+					<p:outputLabel value="Tipo:" for="tipo" />
+					<p:inputText id="tipo" maxlength="20" size="25"
+						placeholder="Digite o tipo" value="#{categoriaMB.categoria.tipo}"
+						required="true" requiredMessage="O logradouro obrigatorio" />
+
+					<p:outputLabel value="Descrição:" for="descricao" />
+					<h:inputTextarea id="descricao" size="150"
+						value="#{categoriaMB.categoria.descricao}">
+
+					</h:inputTextarea>
+
+				</h:panelGrid>
+				<p:commandButton value="Salvar" action="#{categoriaMB.salvar}" ajax="false" />
+			</fieldset>
+		</h:form>
+
+		<h:form id="tbcategoria">
+			<p:dataTable id="tabela" var="categoria"
+				value="#{categoriaMB.categorias}" styleClass="dados"
+				rowClasses="impar,par">
+
+				<f:facet name="header">
+			        Lista das Categorias
+			    </f:facet>
+				<p:column headerText="Nome">
+					<h:outputText value="#{categoria.nome}" />
+				</p:column>
+
+				<p:column headerText="Tipo">
+
+					<h:outputText value="#{categoria.tipo}" />
+
+				</p:column>
+
+				<p:column headerText="Descrição">
+
+					<h:outputText value="#{categoria.descricao}" />
+
+
+				</p:column>
+				<p:column>
+					<p:commandButton value="Deletar"
+						action="#{categoriaMB.deletar}"  >
+						<f:ajax render="@form :tbcategoria"/>
+						<f:setPropertyActionListener value="#{categoria}"
+							target="#{categoriaMB.categoria}" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column>
+
+					<p:commandButton value="Alterar"
+						action="#{categoriaMB.salvar}" ajax="false">
+						<f:ajax render="@form :tbcategoria" />
+						<f:setPropertyActionListener value="#{categoria}"
+							target="#{categoriaMB.categoria}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</div>
+</div>
+<div id="blocoRodape">
+	<div class="container">
+		<p>Copyright 2015. Todos os direitos reservados</p>
+	</div>
+</div>
+</h:body>
+</html>

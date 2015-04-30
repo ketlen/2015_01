@@ -48,14 +48,16 @@ public class UsuarioMB {
 			UsuarioDao dao = new UsuarioDao();
 			if(usuario.getId() == null) {
 				dao.salvar(usuario);
+				this.usuario = new Usuario();
 			} else {
 				dao.editar(usuario);
 			}
 			
+			listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		listar();
+		
 		
 }
 
@@ -64,10 +66,12 @@ public class UsuarioMB {
 		try{
 		UsuarioDao dao = new UsuarioDao();
 		dao.excluir(usuario);
+		this.usuario = new Usuario();
+		listar();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		listar();
+		
 	}
 
 	public void listar() {
@@ -80,12 +84,6 @@ public class UsuarioMB {
 
 	}
 
-	public void alterar(Usuario cl) {
-		//cl = cliente;
-//		UsuarioDao dao = new UsuarioDao();
-//		dao.editar(cl);
-//		this.cliente = cl;
-//		listar();
-	}
+	
 
 }

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html"/>
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Cadastro de Agenda</title>
+	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
+	<h:outputStylesheet library="css" name="grid.css"/>
+	<h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<h:body >
+	
+	<div id="blocoCabecalho">
+		<div class="container">
+		</div>
+	</div>
+	
+	<div id="blocoConteudo">
+	<div class="container">
+	
+	<h2>Cadastro de Agenda</h2>
+	<h:form prependId="false" id="formAgenda" >
+		<fieldset>
+				<legend>Dados da Agenda</legend>
+		
+		<p:panelGrid columns="2"
+					columnClasses="colunaEsquerda,colunaDireita" rowClasses="normal"
+					headerClass="tituloFormulario" styleClass="tabelaGC">
+					
+					<f:facet name="header">
+						<h:outputText value="Cadastro de Agendas" />
+					</f:facet>
+					<h:outputLabel value="Id" for="id" rendered="#{agendaMB.agenda.id} != null"/>
+					<p:inputText id="id" value="#{agendaMB.agenda.id}" rendered="#{agendaMB.agenda.id} != null" readonly="true"/>
+					<h:outputLabel for="local" value="Local:" />
+					<p:inputText id="local" size="40" value="#{agendaMB.agenda.local}" />
+					<h:outputLabel for="evento" value="Evento:"/>
+					<p:inputText id="evento" size="50" value="#{agendaMB.agenda.evento}"/>
+					<h:outputLabel for="data" value="Data:">
+					</h:outputLabel>
+					<p:calendar id="data" pattern="dd/MM/yyyy" value="#{agendaMB.agenda.data}" />
+					
+		</p:panelGrid>
+			<p:commandButton value="Salvar" action="#{agendaMB.salvar}" ajax="false" />
+				
+	</fieldset>
+	</h:form>
+	
+	<h2>Listagem da Agenda</h2>
+	<h:form id="tbAgenda">
+	
+		<p:dataTable id="tabela" var="agenda" value="#{agendaMB.agendas}" >
+		
+			<p:column headerText="Local:">
+				<h:outputText value="#{agenda.local}" />
+			</p:column>
+			<p:column headerText="Evento:">
+				<h:outputText value="#{agenda.evento}" />
+			</p:column>
+			<p:column headerText="Data:">
+				<h:outputText value="#{agenda.data}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			
+			<p:column>
+				<p:commandButton value="Deletar"
+					action="#{agendaMB.deletar}" ajax="false">
+					<f:ajax render="@form :tbAgenda"/>
+					<f:setPropertyActionListener value="#{agenda}"
+						target="#{agendaMB.agenda}" for="" />
+				</p:commandButton>
+			</p:column>
+				<p:column>
+					<p:commandButton value="Alterar" action="#{agendaMB.salvar}">
+						<f:setPropertyActionListener value="#{agenda}"
+							target="#{agendaMB.agenda}"/>
+					</p:commandButton>						
+					</p:column>
+		
+		</p:dataTable>
+	</h:form>
+
+</div>
+	</div>
+	<div id="blocoRodape">
+	<div class="container">
+		
+	</div>
+	</div>
+</h:body>
+</html>

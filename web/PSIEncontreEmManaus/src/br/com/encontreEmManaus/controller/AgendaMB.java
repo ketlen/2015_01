@@ -17,12 +17,15 @@ public class AgendaMB {
 
 	private List<Agenda> agendas;
 	private Agenda agenda;
+	private Agenda select;
+	
 	
 	public AgendaMB() {
 		agendas = new ArrayList<Agenda>();
 		agenda = new Agenda();
 		listar();
 	}
+	
 	
 	public List<Agenda> getAgendas() {
 		return agendas;
@@ -41,16 +44,19 @@ public class AgendaMB {
 	public void salvar() {
 		try {
 			AgendaDao dao = new AgendaDao();
-		if(agenda.getId() == null) {
+			if(agenda.getId() == null) {
 				dao.salvar(agenda);
+				this.agenda = new Agenda();
 			} else {
-				dao.editar(agenda);
+				dao.editar(agenda);	
 			}
-			
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		listar();
+		
 }
 
 	public void deletar() {
@@ -58,10 +64,12 @@ public class AgendaMB {
 		try{
 		AgendaDao dao = new AgendaDao();
 		dao.excluir(agenda);
+		this.agenda = new Agenda();
+		listar();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		listar();
+		
 	}
 
 	public void listar() {
