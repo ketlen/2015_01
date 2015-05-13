@@ -1,83 +1,124 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html >
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<meta charset="UTF-8" />
-	<title>Cadastro de Local</title>
-	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
-</h:head>
-<h:body >
-		 			
-			<h:form prependId="false" id="prform">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	<f:view contentType="text/html"/>
+	<h:head>
+		<title>Sistema Encontre Em Manaus</title>
+		<h:outputStylesheet library="css" name="grid.css"/>
+		<h:outputStylesheet library="css" name="style.css"/>
+	</h:head>
+	<h:body>
+	
+	<div id="blocoCabecalho">
+		<div class="container">
+		<center>Logado como: <h:outputText value="#{loginBean.usuario.nome}"/></center>
+			
+		</div>
+	</div>
+	
+	<div id="blocoConteudo">
+	<div class="container">
+		<h2>Cadastro de Locals</h2>
+		<h:form id="dados">
+			<fieldset>
+				<legend>Dados do local</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Id:" for="id" 
+					     rendered="#{localMB.local.id != null}"/>
+					<h:inputText id="id" 
+						 value="#{localMB.local.id}"
+						 rendered="#{localMB.local.id != null}"
+						 readonly="true"/>
+					<h:outputLabel value="Data cadastro:" for="data" 
+					     rendered="#{localMB.local.id != null}"/>
+					<h:inputText id="data" 
+						 value="#{localMB.local.dataCadastro.time}"
+						 rendered="#{localMB.local.id != null}"
+						 readonly="true">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:inputText>
+					<h:outputLabel value="Nome:" for="nome"/>
+					<h:inputText id="nome" value="#{localMB.local.nome}"/>
+					
+					<h:outputLabel value="Rua:" for="rua"/>
+					<h:inputText id="rua" value="#{localMB.local.rua}"/>
+					
+					<h:outputLabel value="Numero:" for="numero"/>
+					<h:inputText id="numero" value="#{localMB.local.numero}"/>
+					
+					<h:outputLabel value="Bairro:" for="bairro"/>
+					<h:inputText id="bairro" value="#{localMB.local.bairro}"/>
+					
+									
+				    
+					<h:commandButton value="Salvar" action="#{localMB.salvar}">
+						<f:ajax execute="@form" render="@form :tabela" />
+					</h:commandButton>
+					<h:commandLink action="#{localMB.gerar}" value=" Gerar Relatório">
+								   </h:commandLink>
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+			
+		<h2>Listagem de locals</h2>
+		<h:form id="tabela">
+			<h:dataTable value="#{localMB.listaLocals}" var="local"
+				styleClass="dados" rowClasses="impar,par" >
+				<h:column>
+					<f:facet name="header"><h:outputText value="Cadastro" /></f:facet>
+					<h:outputText value="#{local.dataCadastro.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+					#{local.nome}
+				</h:column>
 				
-				<p:panelGrid columns="2"
-					columnClasses="colunaEsquerda,colunaDireita" rowClasses="normal"
-					headerClass="tituloFormulario" styleClass="tabelaGC">
-					<f:facet name="header">
-						<h:outputText value="Cadastro de Locais" />
-					</f:facet>
-					<h:outputLabel for="nome" value="Nome" />
-					<p:inputText id="nome" size="40" value="#{localMB.local.nome}" />
-					<h:outputLabel for="rua" value="RUA" />
-					<p:inputText id="rua" size="11" value="#{localMB.local.rua}" />
-					<h:outputLabel for="numero" value="Numero" />
-					<p:inputText id="numero" size="11"
-						value="#{localMB.local.numero}" />
-					<h:outputLabel for="bairro" value="Bairro" />
-					<p:inputText id="bairro" size="40"
-						value="#{localMB.local.bairro}" />
-					
-				</p:panelGrid>
-				<p:commandButton value="Salvar" action="#{localMB.salvar}"
-					ajax="false" />
-					
-					<p:commandLink action="#{localMB.gerar}" value=" Gerar Relatório">
-								   </p:commandLink>
-					
-			</h:form>
-
-           <h2>Cadastro de Local</h2>
-			<h:form id="tblocal">
-				<p:dataTable id="tabela" var="local" value="#{localMB.locals}">
-					<p:column headerText="Nome: ">
-						<h:outputText value="#{local.nome}" />
-					</p:column>
-					<p:column headerText="Rua: ">
-						<h:outputText value="#{local.rua}" />
-					</p:column>
-					<p:column headerText="Numero: ">
-						<h:outputText value="#{local.numero}" />
-					</p:column>
-					<p:column headerText="Bairro: ">
-						<h:outputText value="#{local.bairro}" />
-					</p:column>
-					<p:column>
-						<p:commandButton value="Deletar"
-							action="#{localMB.deletar}" update="tabela">
-							<f:setPropertyActionListener value="#{local}"
-								target="#{localMB.local}" />
-						</p:commandButton>
-					</p:column>
-					<p:column>
-						<p:commandButton value="Alterar"
-							action="#{localMB.salvar}" ajax="false">
-							<f:ajax render="@form :tblocal"/>
-							<f:setPropertyActionListener value="#{local}"
-								target="#{localMB.local}"/>
-						</p:commandButton>						
-					</p:column>
-				</p:dataTable>
-			</h:form>
+				<h:column>
+					<f:facet name="header"><h:outputText value="Rua" /></f:facet>
+					#{local.rua}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="Numero" /></f:facet>
+					#{local.numero}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="Bairro" /></f:facet>
+					#{local.bairro}
+				</h:column>
+							
+				<h:column>
+					<h:commandLink action="#{localMB.excluir}" 
+								   value="Remover">
+						<f:ajax render="@form" />
+						<f:setPropertyActionListener 
+							target="#{localMB.local}" 
+							value="#{local}"/>
+					</h:commandLink>
+				</h:column>
+				
+				<h:column>
+					<h:commandLink value="Alterar">
+						<f:ajax render="@form :dados" />
+						<f:setPropertyActionListener 
+							target="#{localMB.local}" 
+							value="#{local}"/>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</div>
+	</div>
 	<div id="blocoRodape">
 	<div class="container">
 		<p>Copyright 2014. 
-		Todos os direitos ao Encontre Em Manaus</p>
+		Todos os direitos a Tucumã Software</p>
 	</div>
 	</div>
-</h:body>
+	</h:body>
 </html>

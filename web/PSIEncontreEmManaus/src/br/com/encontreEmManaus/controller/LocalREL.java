@@ -1,6 +1,5 @@
 package br.com.encontreEmManaus.controller;
 
-
 import java.io.FileNotFoundException;
 
 
@@ -15,7 +14,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import br.com.encontreEmManaus.entity.Local;
-  
+
+ 
 
 public class LocalREL   {
 private String path; //Caminho base
@@ -25,30 +25,31 @@ private String path; //Caminho base
 	//Recupera os caminhos para que a classe possa encontrar os relatórios
 	public LocalREL() {
 		
-		//this.path = "C:/projeto/laboratorio/build/classes/";
+		System.out.println("ENTROUUU 11 ");
+		
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
-		this.pathToReportPackage = this.path + "br/com/laboratorio/jasper/";
+		this.pathToReportPackage = this.path + "br/com/encontreEmManaus/jasper/";
 		System.out.println(path);
-		//System.out.printlt(this.getClass().get)
 		
 	}
 
 	public void gerarRel(List<Local> locals) throws FileNotFoundException, JRException{
-	
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "relatorio_local.jrxml");
+		
+		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "local_rel.jrxml");
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(locals));
-		JasperExportManager.exportReportToPdfFile(print, "C://reports//test_jasper.pdf"); 
+		JasperExportManager.exportReportToPdfFile(print, "C://reports//test_local.pdf"); 
 		//abrindo a tela pdf
 		JasperViewer viewer = new JasperViewer(print, false);
 		viewer.show();
 		//abindo maximizado
 		viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
 	}
-public String getPathToReportPackage() {
-	return this.pathToReportPackage;
-}
+	
+	public String getPathToReportPackage() {
+		return this.pathToReportPackage;
+	}
 
-public String getPath() {
-	return this.path;
-}
-}
+	public String getPath() {
+		return this.path;
+	}
+	}

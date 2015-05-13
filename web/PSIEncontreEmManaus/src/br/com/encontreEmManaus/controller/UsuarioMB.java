@@ -14,6 +14,7 @@ import br.com.encontreEmManaus.entity.Usuario;
 @ViewScoped
 public class UsuarioMB {
 
+	private static final long serialVersionUID = 1L;
 	private List<Usuario> usuarios;
 	private Usuario usuario;
 
@@ -45,38 +46,32 @@ public class UsuarioMB {
 
 	public void salvar() {
 		try {
-			UsuarioDao dao = new UsuarioDao();
+			UsuarioDao dao = new UsuarioDao(null);
 			if(usuario.getId() == null) {
 				dao.salvar(usuario);
-				this.usuario = new Usuario();
 			} else {
 				dao.editar(usuario);
 			}
 			
-			listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 }
 
-	public void deletar() {
+	public void deletar(Usuario cl) {
 		// cl = cliente;
 		try{
-		UsuarioDao dao = new UsuarioDao();
-		dao.excluir(usuario);
-		this.usuario = new Usuario();
-		listar();
+		UsuarioDao dao = new UsuarioDao(null);
+		dao.excluir(cl);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 	}
 
 	public void listar() {
 		try{
-		UsuarioDao dao = new UsuarioDao();
+		UsuarioDao dao = new UsuarioDao(null);
 		usuarios = dao.listar();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -84,6 +79,12 @@ public class UsuarioMB {
 
 	}
 
-	
+	public void alterar(Usuario cl) {
+		//cl = cliente;
+//		UsuarioDao dao = new UsuarioDao();
+//		dao.editar(cl);
+//		this.cliente = cl;
+//		listar();
+	}
 
 }

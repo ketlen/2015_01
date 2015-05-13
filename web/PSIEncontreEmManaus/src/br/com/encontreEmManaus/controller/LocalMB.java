@@ -1,77 +1,68 @@
 package br.com.encontreEmManaus.controller;
 
-import javax.faces.bean.ManagedBean;
-
-import javax.faces.bean.ViewScoped;
 
 import java.util.ArrayList;
+
+
+
+import java.util.Calendar;
 import java.util.List;
 
-import br.com.encontreEmManaus.dao.LocalDao;
-import br.com.encontreEmManaus.entity.Local;
-import br.com.encontreEmManaus.controller.LocalREL;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.persistence.EntityManager;
+
 import br.com.encontreEmManaus.entity.Local;
 import br.com.encontreEmManaus.util.JPAUtil;
+import br.com.encontreEmManaus.dao.LocalDao;;
 
-@ManagedBean
-@ViewScoped
+
+
+@ViewScoped// vinculada com a pag web escopo
+@ManagedBean//
 public class LocalMB {
-
-	private List<Local> locals;
-	private Local local;
-
-	public LocalMB() {
-		locals = new ArrayList<Local>();
-		local = new Local();
-		listar();
-	}
+	//Atributos devem ser iniciados
+	private Local local = new Local();
 	
-	
-
-	public List<Local> getLocals() {
-		return locals;
-	}
-
-	public void setLocals(List<Local> locals) {
-		this.locals = locals;
-	}
-
 	public Local getLocal() {
 		return local;
 	}
-
+	
 	public void setLocal(Local local) {
 		this.local = local;
 	}
-
-	//Atributo que guarda a colecao locals armazenados em BD
-		public List<Local> listaLocals = new ArrayList<Local>();
-		
-		public List<Local> getListaLocals() {
-			return listaLocals;
-		}	
-
-	public void salvar() {
-		try {
-			LocalDao dao = new LocalDao();
-			if(local.getId() == null) {
-				dao.salvar(local);
-				this.local = new Local();
-			} else {
-				dao.editar(local);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		listar();
-		
-}
-
 	
+	//Atributo que guarda a colecao locals armazenados em BD
+	public List<Local> listaLocals = new ArrayList<Local>();
+	
+	public List<Local> getListaLocals() {
+		return listaLocals;
+	}	
+
+	//Metodo invocado apos a classe ser carregada pelo servidor
+	@PostConstruct
+	public void carregarLocals(){
+		EntityManager entityManagerFactory = JPAUtil.getEntityManager();
+		LocalDao dao = new LocalDao(entityManagerFactory);
+		listaLocals = dao.listar();
+		entityManagerFactory.close();
+	}
+	public void limpaFormulario(){
+		this.local = new Local();
+	}
+	public void excluir(){
+		EntityManager entityManagerFactory = JPAUtil.getEntityManager();
+		LocalDao dao = new LocalDao(entityManagerFactory);
+		entityManagerFactory.getTransaction().begin();
+		dao.excluir(local);
+		entityManagerFactory.getTransaction().commit();
+		entityManagerFactory.close();
+		carregarLocals();
+	}
 	
 	public void gerar() {
-		
+					
 		LocalREL relatorio = new LocalREL();
 		try {
 		System.out.println("ENTROUUU ");
@@ -79,38 +70,23 @@ public class LocalMB {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("ENTROUUU11111 ");
-		}
-
-	}
-	
-	
-	
-	
-	
-	public void deletar() {
-		
-		try{
-		LocalDao dao = new LocalDao();
-		dao.excluir(local);
-		this.local = new Local();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		listar();
-	}
-	
-
-	public void listar() {
-		try{
-		LocalDao dao = new LocalDao();
-		locals = dao.listar();
-		}catch(Exception e){
-			e.printStackTrace();
 		}
 
 	}
 
-	
-
+	public void salvar(){
+		EntityManager em = JPAUtil.getEntityManager();
+		LocalDao dao = new LocalDao(em);
+		em.getTransaction().begin();
+		local.setDataCadastro(Calendar.getInstance());
+		if(local.getId()!=null){
+			dao.alterar(local);
+		}else{
+			dao.cadastrar(local);
+		}
+		em.getTransaction().commit();
+		em.close();
+		local  = new Local();
+		carregarLocals();
+	}
 }

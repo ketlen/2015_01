@@ -1,33 +1,33 @@
 package br.com.encontreEmManaus.entity;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Entity
-public class Local extends AbstractEntity {
+@Entity//associa uma classe a uma tabela do msm nome no BD
+public class Local {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Id//chave primaria
+	@GeneratedValue//incremento
+	private Long id;
 	private String nome;
 	private String rua;
 	private String numero;
 	private String bairro;
+	//Armazenar apanas a data, sem hora
+	@Temporal(TemporalType.DATE)
+	private Calendar dataCadastro;
 	
 	
-	
-	public Integer getId() {
+	//Metodos de GET e SET...
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -36,23 +36,33 @@ public class Local extends AbstractEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getRua() {
 		return rua;
 	}
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
+	
 	public String getNumero() {
 		return numero;
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+	
+	
 	public String getBairro() {
 		return bairro;
 	}
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-	
+			
+	public Calendar getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Calendar dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
 }
