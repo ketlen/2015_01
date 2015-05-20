@@ -60,22 +60,19 @@
 				<f:facet name="header">
 			        Lista das Categorias
 			    </f:facet>
+			    
 				<p:column headerText="Nome">
 					<h:outputText value="#{categoria.nome}" />
 				</p:column>
 
 				<p:column headerText="Tipo">
-
 					<h:outputText value="#{categoria.tipo}" />
-
 				</p:column>
 
 				<p:column headerText="Descrição">
-
 					<h:outputText value="#{categoria.descricao}" />
-
-
 				</p:column>
+				
 				<p:column>
 					<p:commandButton value="Deletar"
 						action="#{categoriaMB.deletar}" ajax="false" >
@@ -99,8 +96,7 @@
 	</div>
 	<div id="blocoRodape">
 	<div class="container">
-		<p>Copyright 2015. 
-		Todos os direitos reservados</p>
+		<p>Copyright 2015. Todos os direitos a Encontre em Manaus</p>
 	</div>
 	</div>
 </h:body>

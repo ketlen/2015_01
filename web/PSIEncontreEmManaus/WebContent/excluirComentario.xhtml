@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	     
+<f:view contentType="text/html"/>
+
+<h:head>
+	<h:outputStylesheet library="css" name="grid.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<meta charset="UTF-8" />
+	<title>Excluir Comentários</title>
+	<!-- <h:outputStylesheet library="css" name="estilosAplicacao.css" /> -->
+</h:head>
+
+<h:body >
+
+
+
+<div id="blocoConteudo">
+	<div class="container">
+
+		<h:form id="formcomentario">
+			<h2>
+				<h:outputText value="Excluir Comentários" />
+			</h2>
+
+
+			<fieldset>
+				<legend>Cadastro Comentários</legend>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText id="nome" maxlength="20" size="25"
+						placeholder="Digite a nova categoria"
+						value="#{comentarioMB.comentario.nome}" required="true"
+						requiredMessage="O Nome obrigatorio" />
+					
+					<p:outputLabel value="Comentários:" for="descricao" />
+					<h:inputTextarea id="descricao" cols="50" rows="4" size="500" 
+						value="#{comentarioMB.comentario.descricao}"
+						required="true" requiredMessage="Comentário é obrigatorio" />
+
+					
+
+				</h:panelGrid>
+				<p:commandButton value="Salvar" action="#{comentarioMB.salvar}" ajax="false" />
+			</fieldset>
+		</h:form>
+
+		<h:form id="tbcomentario">
+		<fieldset>
+			    <p:dataTable id="tabela" var="comentario"
+				value="#{comentarioMB.comentarios}" styleClass="dados"
+				rowClasses="impar,par">
+				<f:facet name="header">
+			        Lista das Categorias
+			    </f:facet>
+			    
+			    
+									    
+			        <p:column headerText="Nome">
+					<h:outputText value="#{comentario.nome}" />
+				</p:column>
+				
+		
+				    <p:column headerText="Comentários">
+					<h:inputTextarea cols="50" rows="3" size="500"  value="#{comentario.descricao}" />
+				</p:column>
+				
+									
+			<p:column>
+					<p:commandButton value="Deletar"
+						action="#{comentarioMB.deletar}" ajax="false" >
+						<f:setPropertyActionListener value="#{comentario}"
+							target="#{comentarioMB.comentario}" />
+					</p:commandButton>
+				</p:column>
+				
+				</p:dataTable>
+				</fieldset>
+				
+			
+			
+		</h:form>
+	</div>
+	</div>
+	<div id="blocoRodape">
+	<div class="container">
+		<p>Copyright 2015. 
+		Todos os direitos reservados</p>
+	</div>
+	</div>
+</h:body>
+</html>
