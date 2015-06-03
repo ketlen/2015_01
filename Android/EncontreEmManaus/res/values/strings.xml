@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Encontre Em Manaus</string>
+    <string name="hello_world">testando!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
