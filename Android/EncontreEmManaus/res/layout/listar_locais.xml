@@ -49,12 +49,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button3"
-        android:layout_alignLeft="@+id/btrestaurantepeixaria"
+        android:layout_alignLeft="@+id/btRestaurantePeixaria"
         android:layout_alignParentRight="true"
         android:text="Restaurante Rei do Baião" />
 
     <Button
-        android:id="@+id/btrestaurantepeixaria"
+        android:id="@+id/btRestaurantePeixaria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button4"
@@ -72,7 +72,7 @@
         android:text="R E S T A U R A N T E S" />
 
     <Button
-        android:id="@+id/btvoltar"
+        android:id="@+id/btMenuPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button5"
